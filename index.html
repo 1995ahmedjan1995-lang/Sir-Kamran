@@ -3,24 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AhmedJan Auto Publisher Pro</title>
+    <title>AhmedJan Direct YouTube Publisher</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://apis.google.com/js/api.js"></script>
     <style>
         :root {
             --bg-color: #0b0f19;
-            --card-bg: rgba(30, 41, 59, 0.7);
+            --card-bg: rgba(30, 41, 59, 0.85);
             --accent-color: #38bdf8;
-            --btn-grad: linear-gradient(135deg, #2563eb, #1d4ed8);
             --btn-success: linear-gradient(135deg, #10b981, #059669);
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
             --border-color: rgba(255, 255, 255, 0.1);
         }
-
         * { box-sizing: border-box; margin: 0; padding: 0; }
-
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: radial-gradient(circle at top, #1e1b4b 0%, #0b0f19 100%);
             color: var(--text-main);
             min-height: 100vh;
@@ -29,157 +27,42 @@
             align-items: center;
             padding: 20px;
         }
-
         .dashboard-card {
             width: 100%;
             max-width: 650px;
             background: var(--card-bg);
             backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
             border: 1px solid var(--border-color);
             border-radius: 20px;
             padding: 35px;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
         }
-
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
+        .header { text-align: center; margin-bottom: 25px; }
         .header h1 {
-            font-size: 26px;
-            font-weight: 800;
-            background: linear-gradient(to right, #38bdf8, #818cf8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: 24px;
+            color: var(--accent-color);
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
         }
-
-        .header p {
-            color: var(--text-muted);
-            font-size: 13px;
-            margin-top: 6px;
-        }
-
-        .form-group {
-            margin-bottom: 22px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: var(--text-muted);
-            font-weight: 600;
-            font-size: 13px;
-            letter-spacing: 0.5px;
-        }
-
-        label i {
-            margin-right: 6px;
-            color: var(--accent-color);
-        }
-
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; color: var(--text-muted); font-size: 13px; font-weight: 600; }
         input[type="text"], textarea, input[type="file"] {
-            width: 100%;
-            padding: 14px;
-            background: rgba(15, 23, 42, 0.6);
-            border: 1px solid var(--border-color);
-            color: var(--text-main);
-            border-radius: 10px;
-            font-size: 14px;
-            outline: none;
-            transition: all 0.3s ease;
+            width: 100%; padding: 12px; background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--border-color); color: var(--text-main);
+            border-radius: 10px; font-size: 14px; outline: none;
         }
-
-        input[type="text"]:focus, textarea:focus {
-            border-color: var(--accent-color);
-            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
-        }
-
-        textarea.key-input {
-            font-family: 'Fira Code', monospace;
-            font-size: 11px;
-            height: 90px;
-            resize: vertical;
-        }
-
-        .file-upload-wrapper {
-            position: relative;
-        }
-
-        input[type="file"] {
-            cursor: pointer;
-        }
-
         .btn-submit {
-            background: var(--btn-success);
-            color: white;
-            border: none;
-            padding: 16px;
-            width: 100%;
-            font-weight: 700;
-            border-radius: 12px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            box-shadow: 0 10px 20px -5px rgba(16, 185, 129, 0.4);
+            background: var(--btn-success); color: white; border: none;
+            padding: 15px; width: 100%; font-weight: 700; border-radius: 12px;
+            cursor: pointer; font-size: 16px; transition: 0.3s;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
         }
-
-        .btn-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 25px -5px rgba(16, 185, 129, 0.5);
-        }
-
-        .btn-submit:active {
-            transform: translateY(0);
-        }
-
         .console-box {
-            margin-top: 25px;
-            padding: 16px;
-            background: #050811;
-            border-radius: 12px;
-            font-family: 'Fira Code', monospace;
-            font-size: 12px;
-            color: #38bdf8;
-            max-height: 180px;
-            overflow-y: auto;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            line-height: 1.6;
-        }
-
-        .status-badge {
-            display: inline-block;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 600;
-            margin-top: 10px;
-            background: rgba(56, 189, 248, 0.1);
-            color: var(--accent-color);
-            border: 1px solid rgba(56, 189, 248, 0.2);
-        }
-
-        .spinner {
-            display: none;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,.3);
-            border-radius: 50%;
-            border-top-color: #fff;
-            animation: spin 1s ease-in-out infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+            margin-top: 20px; padding: 15px; background: #050811;
+            border-radius: 10px; font-family: monospace; font-size: 12px;
+            color: #38bdf8; max-height: 180px; overflow-y: auto; border: 1px solid rgba(255, 255, 255, 0.05);
         }
     </style>
 </head>
@@ -187,40 +70,36 @@
 
 <div class="dashboard-card">
     <div class="header">
-        <h1><i class="fa-solid fa-rocket"></i> AhmedJan Auto Publisher</h1>
-        <p>Direct Multi-Platform Video Publisher</p>
-        <span class="status-badge"><i class="fa-solid fa-shield-halved"></i> Service Account Authentication</span>
-    </div>
-    
-    <div class="form-group">
-        <label for="serviceKey"><i class="fa-solid fa-key"></i> Google Service Account JSON Key</label>
-        <textarea id="serviceKey" class="key-input" placeholder='Paste full JSON key structure starting with {"type": "service_account"...}'></textarea>
+        <h1><i class="fa-solid fa-cloud-arrow-up"></i> AhmedJan YouTube Publisher</h1>
+        <p style="color: var(--text-muted); font-size: 12px; margin-top: 4px;">Direct Browser-to-YouTube Upload Engine</p>
     </div>
 
     <div class="form-group">
-        <label for="mediaFile"><i class="fa-solid fa-video"></i> Select Video File</label>
-        <div class="file-upload-wrapper">
-            <input type="file" id="mediaFile" accept="video/*">
-        </div>
+        <label for="accessToken"><i class="fa-solid fa-key"></i> OAuth2 Access Token / Bearer Token:</label>
+        <input type="text" id="accessToken" placeholder="Paste active Google OAuth token here...">
     </div>
 
     <div class="form-group">
-        <label for="postTitle"><i class="fa-solid fa-heading"></i> Video Title</label>
+        <label for="mediaFile"><i class="fa-solid fa-video"></i> Select Video File:</label>
+        <input type="file" id="mediaFile" accept="video/*">
+    </div>
+
+    <div class="form-group">
+        <label for="postTitle"><i class="fa-solid fa-heading"></i> Video Title:</label>
         <input type="text" id="postTitle" placeholder="Enter video title...">
     </div>
 
     <div class="form-group">
-        <label for="postDescription"><i class="fa-solid fa-align-left"></i> Description & Hashtags</label>
-        <textarea id="postDescription" rows="3" placeholder="Enter video description and hashtags..."></textarea>
+        <label for="postDescription"><i class="fa-solid fa-align-left"></i> Description:</label>
+        <textarea id="postDescription" rows="3" placeholder="Enter video description..."></textarea>
     </div>
 
-    <button class="btn-submit" id="uploadBtn" onclick="processRealUpload()">
-        <span class="spinner" id="btnSpinner"></span>
-        <span id="btnText"><i class="fa-solid fa-paper-plane"></i> Publish Video Now</span>
+    <button class="btn-submit" id="uploadBtn" onclick="uploadDirectToYouTube()">
+        <i class="fa-solid fa-paper-plane"></i> Start Direct YouTube Upload
     </button>
 
     <div class="console-box" id="logConsole">
-        > System initialized. Ready to process video stream...
+        > System ready. Connect token and select media...
     </div>
 </div>
 
@@ -233,64 +112,68 @@
         consoleDiv.scrollTop = consoleDiv.scrollHeight;
     }
 
-    async function processRealUpload() {
-        const keyInput = document.getElementById('serviceKey').value.trim();
+    async function uploadDirectToYouTube() {
+        const token = document.getElementById('accessToken').value.trim();
         const fileInput = document.getElementById('mediaFile');
         const title = document.getElementById('postTitle').value.trim();
         const description = document.getElementById('postDescription').value.trim();
 
-        if (!keyInput) {
-            alert('Meherbani karke Service Account JSON key paste karein!');
+        if (!token) {
+            alert('OAuth Access Token paste karna zaroori hai!');
             return;
         }
-
         if (!fileInput.files.length || !title) {
-            alert('Video file aur Title dono dena zaroori hai!');
+            alert('Video file aur Title select karein!');
             return;
         }
 
-        // UI Loading state
-        const btnSpinner = document.getElementById('btnSpinner');
-        const btnText = document.getElementById('btnText');
-        const uploadBtn = document.getElementById('uploadBtn');
+        const file = fileInput.files[0];
+        writeLog(`Preparing file: ${file.name} (${Math.round(file.size/1024/1024)} MB)`);
+        writeLog("Initiating Resumable Upload Session with Google APIs...");
 
-        btnSpinner.style.display = 'inline-block';
-        btnText.innerHTML = 'Uploading Video...';
-        uploadBtn.style.pointerEvents = 'none';
-
-        writeLog("Starting automated upload sequence...");
-        writeLog("Validating Service Account credentials...");
-
-        const formData = new FormData();
-        formData.append('serviceKey', keyInput);
-        formData.append('file', fileInput.files[0]);
-        formData.append('title', title);
-        formData.append('description', description);
+        const metadata = {
+            snippet: { title: title, description: description, categoryId: '22' },
+            status: { privacyStatus: 'public' }
+        };
 
         try {
-            writeLog("Connecting to Serverless API (/api/upload)...");
-            
-            const response = await fetch('/api/upload', {
+            // Step 1: Initialize Resumable Session
+            const res = await fetch('https://www.googleapis.com/upload/youtube/v3/videos?uploadType=resumable&part=snippet,status', {
                 method: 'POST',
-                body: formData
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                    'X-Upload-Content-Length': file.size,
+                    'X-Upload-Content-Type': file.type
+                },
+                body: JSON.stringify(metadata)
             });
 
-            const result = await response.json();
+            if (!res.ok) {
+                const errData = await res.json();
+                throw new Error(errData.error ? errData.error.message : 'Session initialization failed');
+            }
 
-            if (response.ok && result.success) {
-                writeLog(`✅ SUCCESS! Video uploaded to YouTube! Video ID: ${result.videoId}`);
-                alert("Mubarak ho! Video kamyabi se upload ho gayi hai!");
+            const uploadUrl = res.headers.get('Location');
+            writeLog("Upload session created. Streaming binary data to YouTube...");
+
+            // Step 2: Upload File Binary
+            const uploadRes = await fetch(uploadUrl, {
+                method: 'PUT',
+                headers: { 'Content-Type': file.type },
+                body: file
+            });
+
+            const uploadResult = await uploadRes.json();
+            if (uploadRes.ok) {
+                writeLog(`✅ SUCCESS! Video published to YouTube Channel! Video ID: ${uploadResult.id}`);
+                alert("Mubarak ho! Video direct YouTube par upload ho gayi hai.");
             } else {
-                writeLog(`❌ ERROR: ${result.error || 'Server request failed.'}`, true);
-                alert("Upload process mein masla aaya: " + (result.error || 'Check console logs.'));
+                throw new Error(uploadResult.error ? uploadResult.error.message : 'Video upload failed');
             }
         } catch (err) {
-            writeLog("❌ SERVER CONNECTION ISSUE: Frontend serverless backend endpoint se connect nahi ho saka. Make sure backend /api/upload is deployed on Vercel.", true);
-            alert("Backend endpoint abhi active nahi hai. Vercel deployment mukammal karein!");
-        } finally {
-            btnSpinner.style.display = 'none';
-            btnText.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Publish Video Now';
-            uploadBtn.style.pointerEvents = 'auto';
+            writeLog(`❌ UPLOAD ERROR: ${err.message}`, true);
+            alert("Upload Error: " + err.message);
         }
     }
 </script>
